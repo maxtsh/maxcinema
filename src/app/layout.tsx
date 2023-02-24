@@ -1,10 +1,12 @@
-import './globals.css'
+import ReactQueryWrapper from "@/libs/ReactQueryWrapper";
+import StyledComponentsRegistry from "@/libs/registry";
+import "@/styles/Global.css";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+type Props = {
+  children: React.ReactNode;
+};
+
+const RootLayout: React.FC<Props> = ({ children }) => {
   return (
     <html lang="en">
       {/*
@@ -12,7 +14,13 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+      <body>
+        <ReactQueryWrapper>
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        </ReactQueryWrapper>
+      </body>
     </html>
-  )
-}
+  );
+};
+
+export default RootLayout;
